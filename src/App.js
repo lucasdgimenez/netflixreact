@@ -3,6 +3,7 @@ import ListApi from "./tmdb"
 import MovieRow from "./components/MovieRow"
 import "./App.css"
 import FeaturedMovie from "./components/FeaturedMovie"
+import Header from "./components/Header"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1))
       let chosen = originals[0].items.results[randomChosen]
       let chosenInfo = await ListApi.getMovieInfo(chosen.id, 'tv')
+      setFeaturedData(chosenInfo)
       console.log(chosenInfo)
     }
 
@@ -27,6 +29,8 @@ function App() {
   }, [])
   return (
     <div className="Page">
+      <Header/>
+
       {featuredData &&
       <FeaturedMovie item={featuredData}/>}
 
